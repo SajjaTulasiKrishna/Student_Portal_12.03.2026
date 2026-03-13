@@ -1,0 +1,33 @@
+package mits.Student_Portal_Backend;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class Student_Service {
+
+	private final Student_Repo sr;
+	
+	public Student_Service(Student_Repo repo){
+		this.sr = repo;
+	}
+	
+	//insert
+	//register
+	public Student register(Student stu) {
+		return sr.save(stu);
+	}
+	//login
+	public Student login(String email, String password) {
+		Student user = sr.findByEmail(email);
+		return (user!=null && user.getPassword().equals(password))? user : null ;
+	}
+	
+	//retrieve
+	public List<Student> allusers(){
+		return sr.findAll();
+	}
+	
+	
+}
